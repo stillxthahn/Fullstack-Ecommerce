@@ -6,25 +6,30 @@ import useFetchDocument from "../../hooks/useFetchDocument";
 import OrderDetailsComponent from "../../components/orderDetailsComponent/OrderDetailsComponent";
 
 const AdminOrderDetails = () => {
-	const [order, setOrder] = useState(null);
-	const { id } = useParams();
-	const { document } = useFetchDocument("orders", id);
+ const [order, setOrder] = useState(null);
+ const { id } = useParams();
+ const { document } = useFetchDocument("http://localhost:3000", "orders", id);
 
-	useEffect(() => {
-		setOrder(document);
-	}, [document]);
+ useEffect(() => {
+  setOrder(document);
+ }, [document]);
 
-	return (
-		<>
-			{order === null ? (
-				<Loader />
-			) : (
-				<div>
-					<OrderDetailsComponent order={order} user={false} admin={true} orderId={id} />
-				</div>
-			)}
-		</>
-	);
+ return (
+  <>
+   {order === null ? (
+    <Loader />
+   ) : (
+    <div>
+     <OrderDetailsComponent
+      order={order}
+      user={false}
+      admin={true}
+      orderId={id}
+     />
+    </div>
+   )}
+  </>
+ );
 };
 
 export default AdminOrderDetails;

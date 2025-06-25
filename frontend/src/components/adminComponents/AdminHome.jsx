@@ -14,29 +14,33 @@ const productIcon = <FaCartArrowDown size={22} color="white" />;
 const orderIcon = <BsCart size={22} color="white" />;
 
 const AdminHome = () => {
-	const { data } = useFetchCollection("orders");
-	const { products } = useSelector((store) => store.product);
-	const { orderHistory, totalAmount } = useSelector((store) => store.order);
-	const dispatch = useDispatch();
+ const { data } = useFetchCollection("http://localhost:3000", "orders");
+ const { products } = useSelector((store) => store.product);
+ const { orderHistory, totalAmount } = useSelector((store) => store.order);
+ const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(storeOrders(data));
-		dispatch(totalOrderAmount());
-	}, [dispatch, data]);
+ useEffect(() => {
+  dispatch(storeOrders(data));
+  dispatch(totalOrderAmount());
+ }, [dispatch, data]);
 
-	return (
-		<main className="h-full border-r-2 p-1">
-			<h1 className="text-xl md:text-3xl font-light mb-4">Admin Home</h1>
-			<section className="flex flex-wrap gap-10">
-				<InfoBox title={"Earnings"} count={formatPrice(totalAmount)} icon={earningIcon} />
-				<InfoBox title={"Products"} count={products.length} icon={orderIcon} />
-				<InfoBox title={"Orders"} count={orderHistory.length} icon={productIcon} />
-			</section>
-			<div>
-				<Chart />
-			</div>
-		</main>
-	);
+ return (
+  <main className="h-full border-r-2 p-1">
+   <h1 className="text-xl md:text-3xl font-light mb-4">Admin Home</h1>
+   <section className="flex flex-wrap gap-10">
+    <InfoBox
+     title={"Earnings"}
+     count={formatPrice(totalAmount)}
+     icon={earningIcon}
+    />
+    <InfoBox title={"Products"} count={products.length} icon={orderIcon} />
+    <InfoBox title={"Orders"} count={orderHistory.length} icon={productIcon} />
+   </section>
+   <div>
+    <Chart />
+   </div>
+  </main>
+ );
 };
 
 export default AdminHome;

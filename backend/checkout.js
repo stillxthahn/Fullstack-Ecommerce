@@ -5,10 +5,10 @@ const app = express();
 const mysql = require("mysql2/promise");
 // This is your test secret API key.
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-
+const morgan = require("morgan");
 app.use(express.json());
 app.use(cors());
-
+app.use(morgan("dev"));
 const pool = mysql.createPool({
  host: "localhost", // nếu cùng container thì dùng "mysql-container" hoặc "mysql" (Docker Compose)
  user: "root",

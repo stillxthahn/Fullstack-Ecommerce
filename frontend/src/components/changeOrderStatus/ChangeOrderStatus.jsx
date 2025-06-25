@@ -10,30 +10,47 @@ const ChangeOrderStatus = ({ order, orderId }) => {
  const [status, setStatus] = useState("");
  const [isLoading, setIsloading] = useState(false);
  const navigate = useNavigate();
-
- const changeStatus = (e, orderId) => {
+ console.log("ChangeOrderStatus", order);
+ const changeStatus = async (e, orderId) => {
   e.preventDefault();
   setIsloading(true);
+  console.log("status", status);
   const orderDetails = {
-   userId: order.userId,
-   email: order.email,
-   orderDate: order.orderDate,
-   orderTime: order.orderTime,
-   orderAmount: order.orderAmount,
-   orderStatus: status,
-   cartItems: order.cartItems,
-   shippingAddress: order.shippingAddress,
-   createdAt: order.createdAt,
-   editedAt: Timestamp.now().toDate(),
+   //    user_id: order.user_id,
+   //    email: order.email,
+   //    order_date: order.order_date,
+   //    order_time: order.order_time,
+   //    order_amount: order.order_amount,
+   order_status: status,
+   //    cartItems: order.cartItems,
+   //    shippingAddress: order.shippingAddress,
+   //    created_at: order.created_at,
+   //    editedAt: new Date(), //
   };
+
   try {
-   setDoc(doc(db, "orders", orderId), orderDetails);
-   setIsloading(false);
-   toast.success(`order status changed to ${status}`);
+   const token = localStorage.getItem("token");
+
+   const res = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
+    method: "PUT",
+    headers: {
+     "Content-Type": "application/json",
+     Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(orderDetails),
+   });
+
+   if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.message || "Failed to update order");
+   }
+
+   toast.success(`Order status changed to ${status}`);
    navigate("/admin/orders");
   } catch (error) {
    toast.error(error.message);
-   console.log(error);
+   console.error("Update error:", error);
+  } finally {
    setIsloading(false);
   }
  };

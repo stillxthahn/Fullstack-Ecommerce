@@ -22,23 +22,25 @@ const Navbar = () => {
  const dispatch = useDispatch();
 
  //* Monitor currently signed USER
- //  useEffect(() => {
- //   const user = JSON.parse(localStorage.getItem("user"));
- //   if (user) {
- //    console.log("User found in localStorage:", user);
- //    setDisplayName(user.email.split("@")[0]);
- //    dispatch(
- //     setActiveUser({
- //      email: user.email,
- //      userName: user.userName || user.email.split("@")[0],
- //      userId: user.id,
- //     })
- //    );
- //   } else {
- //    setDisplayName("");
- //    dispatch(removeActiveUser());
- //   }
- //  }, [dispatch]);
+ useEffect(() => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (user) {
+   // console.log("User found in localStorage:", user);
+   setDisplayName(user.email.split("@")[0]);
+
+   dispatch(
+    setActiveUser({
+     email: user.email,
+     userName: user.userName || user.email.split("@")[0],
+     userId: user.id,
+     token: localStorage.getItem("token"),
+    })
+   );
+  } else {
+   setDisplayName("");
+   dispatch(removeActiveUser());
+  }
+ }, [dispatch]);
  useEffect(() => {
   console.log("isUserLoggedIn:", isUserLoggedIn);
   if (isUserLoggedIn || localStorage.getItem("user")) {

@@ -16,6 +16,69 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `order_items`
+--
+
+DROP TABLE IF EXISTS `order_items`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `order_items` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` int DEFAULT NULL,
+  `product_id` varchar(50) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `description` text,
+  `image_url` text,
+  `category` varchar(100) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_items`
+--
+
+LOCK TABLES `order_items` WRITE;
+/*!40000 ALTER TABLE `order_items` DISABLE KEYS */;
+INSERT INTO `order_items` VALUES (1,5,'23','man tshirt','The fabric is soft and breathable, making it comfortable to wear throughout the day. Customers appreciate the quality of the material, noting that it holds up well after multiple washes without fading or losing shape. The colors are vibrant and true to the pictures shown online.','https://d-ec-products.s3.us-east-1.amazonaws.com/uploads/22.avif','Fashion',499.00,1),(2,6,'31','Apple MacBook Pro 13-inch 2022','Apple MacBook Pro 13-inch 2022 is a macOS laptop with a 13.30-inch display. It is powered by a Apple M2 processor and it comes with 8GB of RAM. The Apple MacBook Pro 13-inch 2022 packs 256GB of SSD storage . Connectivity options include Wi-Fi 802.11 a/b/g/n/ac and it comes with 2 USB ports, Thunderbolt 4 (Type C), Headphone and Mic Combo Jack ports.','https://d-ec-products.s3.us-east-1.amazonaws.com/uploads/30.png','Laptop',56000.00,2),(3,7,'27','Mens Casual Slim Fit','The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.','https://d-ec-products.s3.us-east-1.amazonaws.com/uploads/26.jpg','Fashion',3999.00,1),(4,7,'28','Mens Cotton Jacket','The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.','https://d-ec-products.s3.us-east-1.amazonaws.com/uploads/27.jpg','Fashion',5999.00,1),(5,7,'29','Casual Premium Slim Fit T-Shirts','Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket','https://d-ec-products.s3.us-east-1.amazonaws.com/uploads/28.jpg','Fashion',4999.00,1),(6,7,'34','RUSTIC CHARM','New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart','https://d-ec-products.s3.us-east-1.amazonaws.com/uploads/33.jpg','Fashion',6000.00,1);
+/*!40000 ALTER TABLE `order_items` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `orders` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `order_date` date DEFAULT NULL,
+  `order_time` time DEFAULT NULL,
+  `order_amount` decimal(10,2) DEFAULT NULL,
+  `order_status` varchar(50) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders`
+--
+
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (5,1,'lxthanh235@gmail.com','2025-06-23','11:47:15',499.00,'Order Placed','2025-06-23 04:47:15'),(6,1,'lxthanh235@gmail.com','2025-06-25','01:09:21',112000.00,'Item(s) Shipped','2025-06-25 18:09:21'),(7,1,'lxthanh235@gmail.com','2025-06-25','01:27:12',20997.00,'Processing...','2025-06-25 18:27:12');
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `products`
 --
 
@@ -46,6 +109,38 @@ INSERT INTO `products` VALUES (2,'Stainless Steel','Stainless Steel Gold 2-Piece
 UNLOCK TABLES;
 
 --
+-- Table structure for table `shipping_addresses`
+--
+
+DROP TABLE IF EXISTS `shipping_addresses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `shipping_addresses` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` int DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `line1` varchar(255) DEFAULT NULL,
+  `line2` varchar(255) DEFAULT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `country` varchar(100) DEFAULT NULL,
+  `pin_code` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `shipping_addresses`
+--
+
+LOCK TABLES `shipping_addresses` WRITE;
+/*!40000 ALTER TABLE `shipping_addresses` DISABLE KEYS */;
+INSERT INTO `shipping_addresses` VALUES (7,5,'Thanh Lương','1657163380','108 Hà Huy Tập','231312','Đà Lạt','Vietnam','123123123'),(8,6,'Thanh Lương','1657163380','108 Hà Huy Tập','Test','Đà Lạt','Vietnam','test'),(9,7,'TESt','TESt','TESt','TESt','TESt','TESt','TESt');
+/*!40000 ALTER TABLE `shipping_addresses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -58,7 +153,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +162,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'lxthanh235@gmail.com','$2b$10$6xGKQi5WXFJlgYr7dipmhucLKI7j8pD0XlXe3OfFqW5BijP9UMzIC');
+INSERT INTO `users` VALUES (1,'lxthanh235@gmail.com','$2b$10$6xGKQi5WXFJlgYr7dipmhucLKI7j8pD0XlXe3OfFqW5BijP9UMzIC'),(2,'admin@gmail.com','$2b$10$6EYuoejF9aySbubfHUOPneYQmkJMOlw3it2u2g.im9/ZJW8G5xqru');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -80,4 +175,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-06-22 17:47:00
+-- Dump completed on 2025-06-25 19:34:53

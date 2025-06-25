@@ -27,7 +27,7 @@ const Login = () => {
     },
     body: JSON.stringify({ email, password }),
    });
-
+   console.log(res.status);
    if (res.status === 200) {
     const data = await res.json();
     console.log("Login response:", data);
@@ -44,7 +44,7 @@ const Login = () => {
      navigate("/");
     }
    } else {
-    toast.error(data.message || "Login failed");
+    toast.error(res.json().message || "Login failed");
    }
   } catch (err) {
    console.error("Login error:", err);

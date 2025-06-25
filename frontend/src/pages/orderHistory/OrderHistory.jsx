@@ -10,31 +10,36 @@ import { storeOrders } from "../../redux/slice/orderSlice";
 import { formatPrice } from "../../utils/formatPrice";
 
 const OrderHistory = () => {
-	const { data, isLoading } = useFetchCollection("orders");
-	const { orderHistory } = useSelector((store) => store.order);
-	const { userId } = useSelector((store) => store.auth);
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
+ const { data, isLoading } = useFetchCollection(
+  "http://localhost:3000",
+  "orders"
+ );
+ const { orderHistory } = useSelector((store) => store.order);
+ const { userId } = useSelector((store) => store.auth);
+ const dispatch = useDispatch();
+ const navigate = useNavigate();
+ useEffect(() => {
+  dispatch(storeOrders(data));
+ }, [dispatch, data]);
 
-	useEffect(() => {
-		dispatch(storeOrders(data));
-	}, [dispatch, data]);
+ function handleClick(orderId) {
+  navigate(`/order-details/${orderId}`);
+ }
+ console.log("Order History Rendered", orderHistory);
+ const filteredOrders = orderHistory.filter(
+  (order) => order.user_id === userId
+ );
+ console.log("filteredOrders History", filteredOrders);
 
-	function handleClick(orderId) {
-		navigate(`/order-details/${orderId}`);
-	}
-
-	const filteredOrders = orderHistory.filter((order) => order.userId === userId);
-
-	return (
-		<>
-			{isLoading && <Loader />}
-			<Header text="My Orders" />
-			<main className="w-full mx-auto px-2 lg:w-9/12 md:px-6 mt-6 ">
-				<OrdersComponent orders={filteredOrders} user={true} admin={false} />
-			</main>
-		</>
-	);
+ return (
+  <>
+   {isLoading && <Loader />}
+   <Header text="My Orders" />
+   <main className="w-full mx-auto px-2 lg:w-9/12 md:px-6 mt-6 ">
+    <OrdersComponent orders={filteredOrders} user={true} admin={false} />
+   </main>
+  </>
+ );
 };
 
 export default OrderHistory;

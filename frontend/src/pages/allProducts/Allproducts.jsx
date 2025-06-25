@@ -9,7 +9,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { storeProducts, getPriceRange } from "../../redux/slice/productSlice";
 
 const Allproducts = () => {
- const { data, isLoading } = useFetchCollection("products");
+ const { data, isLoading } = useFetchCollection(
+  "http://localhost:3000",
+  "products"
+ );
  const dispatch = useDispatch();
 
  useEffect(() => {

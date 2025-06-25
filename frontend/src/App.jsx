@@ -38,6 +38,7 @@ const App = () => {
      email: user.email,
      userName: user.userName,
      userId: user.userId,
+     token: localStorage.getItem("token"),
     })
    );
   } else {
