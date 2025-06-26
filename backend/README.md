@@ -8,6 +8,10 @@ mysql -u root -p123456
 BACKUP docker exec mysql-container mysqldump -u root -p123456 mydb > ./mydb_dump.sql
 docker exec -it mysql-container bash
 
+RESTORE docker cp ./mydb_dump.sql mysql-container:/tmp/mydb_dump.sql
+docker exec -i mysql-container mysql -u root -p123456 -e "CREATE DATABASE IF NOT EXISTS mydb;"
+docker exec -i mysql-container mysql -u root -p123456 mydb < /tmp/mydb_dump.sql
+
 SWAGGER: npx open-swagger-ui --open "d-apigw-test-d-apigw-test-v1-swagger (1).json"
 **TABLE SCHEMA**
 USER

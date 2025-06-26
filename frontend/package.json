@@ -14,6 +14,7 @@
       "@reduxjs/toolkit": "^1.8.6",
       "@stripe/react-stripe-js": "^1.14.0",
       "@stripe/stripe-js": "^1.42.0",
+      "axios": "^1.10.0",
       "chart.js": "^3.9.1",
       "cors": "^2.8.5",
       "daisyui": "^2.31.0",
