@@ -16,6 +16,7 @@ import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux";
 import { clearCart } from "../../redux/slice/cartSlice";
 import Loader from "../loader/Loader";
+import axios from "axios";
 
 const CheckoutForm = () => {
  const stripe = useStripe();
@@ -33,8 +34,8 @@ const CheckoutForm = () => {
  // Hàm gọi backend API lưu đơn hàng
  const saveOrder = async () => {
   const dateObj = new Date();
-  const orderDate = dateObj.toISOString().split("T")[0]; // yyyy-mm-dd
-  const orderTime = dateObj.toTimeString().split(" ")[0]; // HH:MM:SS 24h format
+  const orderDate = dateObj.toISOString().split("T")[0];
+  const orderTime = dateObj.toTimeString().split(" ")[0];
   const orderDetails = {
    userId,
    email,
@@ -46,24 +47,24 @@ const CheckoutForm = () => {
    shippingAddress,
    createdAt: dateObj.toISOString(),
   };
-
+  console.log("Order Details:", orderDetails);
   try {
-   const res = await fetch("http://localhost:4242/api/orders", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(orderDetails),
-   });
-
-   if (!res.ok) {
-    const errorData = await res.json();
-    throw new Error(errorData.error || "Failed to save order");
-   }
+   const res = await axios.post(
+    // "http://localhost:4242/api/orders",
+    "https://aasn59g8v0.execute-api.us-east-1.amazonaws.com/dev/api/orders",
+    orderDetails,
+    {
+     headers: { "Content-Type": "application/json" },
+    }
+   );
 
    dispatch(clearCart());
    toast.success("Order saved successfully");
   } catch (error) {
-   toast.error("Error saving order: " + error.message);
-   throw error; // cho handleSubmit biết
+   const errorMsg =
+    error.response?.data?.error || error.message || "Failed to save order";
+   toast.error("Error saving order: " + errorMsg);
+   throw error;
   }
  };
 

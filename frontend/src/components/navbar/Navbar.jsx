@@ -32,7 +32,7 @@ const Navbar = () => {
     setActiveUser({
      email: user.email,
      userName: user.userName || user.email.split("@")[0],
-     userId: user.id,
+     userId: user.userId,
      token: localStorage.getItem("token"),
     })
    );

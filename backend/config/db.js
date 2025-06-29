@@ -1,11 +1,17 @@
 const mysql = require("mysql2");
 
 const pool = mysql.createPool({
- host: "localhost", // nếu cùng container thì dùng "mysql-container" hoặc "mysql" (Docker Compose)
- user: "root",
- password: "123456",
+ host: "d-ec-rds.cxiow4kwa1fe.us-east-1.rds.amazonaws.com",
+ user: "admin",
+ password: "xuanthanh235",
  database: "mydb",
 });
+// const pool = mysql.createPool({
+//  host: "localhost",
+//  user: "root",
+//  password: "123456",
+//  database: "mydb",
+// });
 
 pool.getConnection((err, connection) => {
  if (err) {

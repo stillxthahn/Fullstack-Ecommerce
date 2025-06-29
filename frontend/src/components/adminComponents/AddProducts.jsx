@@ -48,20 +48,22 @@ const AddProducts = () => {
   formData.append("category", product.category);
   formData.append("brand", product.brand);
   formData.append("description", product.description);
-  formData.append("image", file);
+  formData.append("file", file);
   try {
    await axios.post(
-    "https://rfpu2606yj.execute-api.us-east-1.amazonaws.com/dev/api/products",
+    "https://aasn59g8v0.execute-api.us-east-1.amazonaws.com/dev/api/products",
+    // "http://localhost:3000/api/products/lambda",
     formData,
     {
      headers: {
-      "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${token}`,
+      //   Accept: "*/*",
+      //   "Content-Type": "multipart/form-data",
+      //   Authorization: `Bearer ${token}`,
      },
-     onUploadProgress: (e) => {
-      const percent = (e.loaded / e.total) * 100;
-      setUploadProgress(percent);
-     },
+     //   onUploadProgress: (e) => {
+     //    const percent = (e.loaded / e.total) * 100;
+     //    setUploadProgress(percent);
+     //   },
     }
    );
 

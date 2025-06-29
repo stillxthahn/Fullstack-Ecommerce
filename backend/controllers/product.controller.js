@@ -79,7 +79,7 @@ exports.handler = async (event) => {
   //     "Access-Control-Allow-Methods": "*",
   //   },
   //   statusCode: 200,
-  //   body: JSON.stringify({ imageURL: `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${process.env.AWS_BUCKET_PREFIX}/${key}` }),
+  //   body: JSON.stringify({ fields, file }),
   // };
 
   // 3. Upload file to S3
@@ -90,21 +90,13 @@ exports.handler = async (event) => {
    new PutObjectCommand({
     Bucket: process.env.AWS_BUCKET_NAME,
     Key: key,
-    Body: file.data,
+    Body: file.data.data,
     ContentType: file.filename.mimeType,
    })
   );
 
-  const imageURL = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
-  return {
-   headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "*",
-    "Access-Control-Allow-Methods": "*",
-   },
-   statusCode: 200,
-   body: imageURL,
-  };
+  const imageURL = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${process.env.AWS_BUCKET_PREFIX}/${key}`;
+  // const imageURL = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
 
   // 4. Save product to DB
   // const conn = await pool.getConnection();
@@ -158,3 +150,5 @@ exports.handler = async (event) => {
   };
  }
 };
+
+module.exports = parseMultipart;
