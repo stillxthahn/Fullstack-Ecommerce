@@ -1,11 +1,10 @@
 const mysql = require("mysql2");
 
 const pool = mysql.createPool({
- host:
-  "proxy-1751185420170-d-ec-rds.proxy-cxiow4kwa1fe.us-east-1.rds.amazonaws.com",
- user: "admin",
- password: "xuanthanh235",
- database: "mydb",
+ host: process.env.RDS_HOST,
+ user: process.env.RDS_USER,
+ password: process.env.RDS_PASSWORD,
+ database: process.env.RDS_DB,
 });
 // const pool = mysql.createPool({
 //  host: "localhost",
