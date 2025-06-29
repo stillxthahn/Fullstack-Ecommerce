@@ -11,7 +11,7 @@ const OrderTable = ({ user, order }) => {
     <thead>
      <tr>
       <th className="text-sm md:text-lg">Product</th>
-      {user && <th className="text-sm md:text-lg">Actions</th>}
+      {/* {user && <th className="text-sm md:text-lg">Actions</th>} */}
      </tr>
     </thead>
     <tbody>
@@ -46,7 +46,7 @@ const OrderTable = ({ user, order }) => {
           </div>
          </Link>
         </td>
-        {user && (
+        {/* {user && (
          <td>
           <Link
            to={`/review-product/${product_id}`}
@@ -55,7 +55,7 @@ const OrderTable = ({ user, order }) => {
            Write a Review
           </Link>
          </td>
-        )}
+        )} */}
        </tr>
       );
      })}

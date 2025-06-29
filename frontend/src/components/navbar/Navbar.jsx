@@ -96,14 +96,14 @@ const Navbar = () => {
          All Products
         </NavLink>
        </li>
-       <li className="hidden lg:block text-white text-xs md:text-xl">
+       {/* <li className="hidden lg:block text-white text-xs md:text-xl">
         <NavLink
          to="/contact"
          style={({ isActive }) => (isActive ? activeStyle : null)}
         >
          Contact Us
         </NavLink>
-       </li>
+       </li> */}
       </ul>
      </div>
      <div className="md:gap-2">

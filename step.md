@@ -36,28 +36,38 @@
 - Restore through bastion host
 
 **ALB**
-- EC2 uesr data:
 - Add role ec-secret-reader to the EC2 instance
+- SG inbound rules: HTTP: 3000 from ALB
+  - HTTP: 80 from anywhere
+  - HTTPS: 443 from anywhere
+- SG outbound rules: MYSQL: 3306 to RDS
+- EC2 uesr data:
 ```bash
 #!/bin/bash
-
 sudo dnf update -y
-
 sudo dnf install -y git
 sudo dnf install -y nodejs
-
-
 git clone https://github.com/stillxthahn/Fullstack-Ecommerce
-
 cd Fullstack-Ecommerce/backend
-
 sudo npm install
-
 sudo npm install -g pm2
 pm2 start server.js --name "backend" --watch
 pm2 startup
+sudo env PATH=$PATH:/usr/bin /usr/lib/nodejs18/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user
 pm2 save
 
-
-
 ```
+- Target group: Listen on port 3000
+- Health check path: /health
+
+**Lambda**
+- Connect RDS:
+  - Auto attach IAM role with permissions to access RDS 
+  - Auto create SG:
+    - rds-lambda-3: Ingress rule for allowing lambda function to connect to rds db -> map to lambda-rds-1
+    - lambda-rds-1: Egress rule for allowing lambda function to connect to rds db -> map to rds-lambda-3, rds-lambda-1
+- Add proxy:
+  - Auto attach IAM role with permissions to access RDS Proxy
+  - Auto create SG:
+    - rdsproxy-lambda-2: Ingress rule for allowing lambda function to connect to rds proxy -> map to lambda-rdsproxy-2
+    - lambda-rdsproxy-2: Egress rule for allowing lambda function to connect to rds proxy -> map to rdsproxy-lambda-2, rdsproxy-lambda-2 

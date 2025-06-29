@@ -33,7 +33,10 @@ const ProductDetails = () => {
   console.log("Fetching product with ID:", id);
   setIsLoading(true);
   try {
-   const res = await fetch(`http://localhost:3000/api/products/${id}`);
+   const res = await fetch(
+    // `http://localhost:3000/api/products/${id}`
+    `http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com/api/products/${id}`
+   );
    if (!res.ok) throw new Error("Failed to fetch product");
    const data = await res.json();
    setProduct(data);
@@ -46,7 +49,10 @@ const ProductDetails = () => {
  // Fetch reviews for product
  async function fetchReviews() {
   try {
-   const res = await fetch(`http://localhost:3000/api/reviews?productId=${id}`);
+   const res = await fetch(
+    // `http://localhost:3000/api/reviews?productId=${id}`
+    `http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com/api/reviews?productId=${id}`
+   );
    if (!res.ok) throw new Error("Failed to fetch reviews");
    const data = await res.json();
    setReviews(data);

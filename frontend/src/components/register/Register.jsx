@@ -26,11 +26,15 @@ const Register = () => {
   setIsLoading(true);
 
   try {
-   const res = await fetch("http://localhost:3000/api/auth/register", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-   });
+   const res = await fetch(
+    // "http://localhost:3000/api/auth/register",
+    "http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com/api/auth/register",
+    {
+     method: "POST",
+     headers: { "Content-Type": "application/json" },
+     body: JSON.stringify({ email, password }),
+    }
+   );
 
    const data = await res.json();
 

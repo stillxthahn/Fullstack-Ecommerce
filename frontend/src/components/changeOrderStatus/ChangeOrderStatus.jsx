@@ -31,14 +31,18 @@ const ChangeOrderStatus = ({ order, orderId }) => {
   try {
    const token = localStorage.getItem("token");
 
-   const res = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
-    method: "PUT",
-    headers: {
-     "Content-Type": "application/json",
-     Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(orderDetails),
-   });
+   const res = await fetch(
+    // `http://localhost:3000/api/orders/${orderId}`,
+    `http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com/api/orders/${orderId}`,
+    {
+     method: "PUT",
+     headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+     },
+     body: JSON.stringify(orderDetails),
+    }
+   );
 
    if (!res.ok) {
     const err = await res.json();

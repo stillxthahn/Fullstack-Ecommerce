@@ -9,7 +9,12 @@ import OrderDetailsComponent from "../../components/orderDetailsComponent/OrderD
 const OrderDetails = () => {
  const [order, setOrder] = useState(null);
  const { id } = useParams();
- const { document } = useFetchDocument("http://localhost:3000", "orders", id);
+ const { document } = useFetchDocument(
+  // "http://localhost:3000",
+  "http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com",
+  "orders",
+  id
+ );
 
  useEffect(() => {
   setOrder(document);

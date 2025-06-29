@@ -14,11 +14,16 @@ const productIcon = <FaCartArrowDown size={22} color="white" />;
 const orderIcon = <BsCart size={22} color="white" />;
 
 const AdminHome = () => {
- const { data } = useFetchCollection("http://localhost:3000", "orders");
+ const { data } = useFetchCollection(
+  // "http://localhost:3000",
+  "http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com",
+  "orders"
+ );
  const { products } = useSelector((store) => store.product);
  const { orderHistory, totalAmount } = useSelector((store) => store.order);
+ console.log(orderHistory);
  const dispatch = useDispatch();
-
+ console.log(totalAmount);
  useEffect(() => {
   dispatch(storeOrders(data));
   dispatch(totalOrderAmount());

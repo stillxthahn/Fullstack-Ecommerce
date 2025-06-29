@@ -10,7 +10,8 @@ import OrdersComponent from "../ordersComponent/OrdersComponent";
 
 const Orders = () => {
  const { data, isLoading } = useFetchCollection(
-  "http://localhost:3000",
+  //   "http://localhost:3000",
+  "http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com",
   "orders"
  );
  const { orderHistory } = useSelector((store) => store.order);
