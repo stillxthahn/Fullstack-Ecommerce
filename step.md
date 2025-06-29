@@ -34,4 +34,39 @@
 - RDS Proxy: 1 SG - 3 inbound rules: For Lambda, and RDS since Proxy and Instance using 1 SG
 - Store user information (name, email, password hash, etc.)
 - Restore through bastion host
-- 
+
+**ALB**
+- EC2 uesr data:
+```bash
+#!/bin/bash
+
+# Cập nhật hệ thống
+yum update -y
+
+# Cài Git
+yum install -y git
+
+# Cài Node.js (phiên bản 18 - LTS)
+yum module reset nodejs -y
+yum module enable nodejs:18 -y
+yum install -y nodejs
+
+# Kiểm tra phiên bản
+git --version
+node --version
+npm --version
+
+# Clone repo
+git clone https://github.com/stillxthahn/Fullstack-Ecommerce
+
+# Vào thư mục backend
+cd Fullstack-Ecommerce/backend || exit 1
+
+# tao!
+
+# Cài các package Node.js
+npm install
+
+# Chạy app
+npm run dev`
+```
