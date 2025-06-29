@@ -37,6 +37,7 @@
 
 **ALB**
 - EC2 uesr data:
+- Add role ec-secret-reader to the EC2 instance
 ```bash
 #!/bin/bash
 
@@ -50,18 +51,12 @@ git clone https://github.com/stillxthahn/Fullstack-Ecommerce
 
 cd Fullstack-Ecommerce/backend
 
-
 sudo npm install
-
-cat > .env <<EOF
-EOF
 
 sudo npm install -g pm2
 pm2 start server.js --name "backend" --watch
 pm2 startup
 pm2 save
-# sudo env PATH=$PATH:/usr/bin /usr/lib/nodejs18/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user
-
 
 
 

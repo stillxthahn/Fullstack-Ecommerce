@@ -8,7 +8,7 @@ const {
  GetSecretValueCommand,
 } = require("@aws-sdk/client-secrets-manager");
 
-// app.use(cors());
+app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
@@ -46,15 +46,16 @@ client
   process.env.RDS_PASSWORD = secret.RDS_PASSWORD;
   process.env.RDS_DB = secret.RDS_DB;
   // Middleware setup
-  app.use(
-   cors({
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-   })
-  );
-  app.use(express.json());
-  app.use(morgan("dev"));
+  //   app.use(
+  //    cors({
+  //     origin: "http://localhost:5173",
+  //     methods: ["GET", "POST", "PUT", "DELETE"],
+  //     credentials: true,
+  //    })
+  //   );
+  //   app.use(cors());
+  //   app.use(express.json());
+  //   app.use(morgan("dev"));
 
   // Health check
   app.get("/health", (req, res) => {
@@ -68,7 +69,9 @@ client
 
   // Start server
   const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+  app.listen(PORT, "0.0.0.0", () =>
+   console.log(`🚀 Server running on port ${PORT}`)
+  );
  })
  .catch((err) => {
   console.error("❌ Failed to load secrets:", err);
