@@ -40,27 +40,15 @@
 ```bash
 #!/bin/bash
 
-# Cập nhật hệ thống
-yum update -y
+sudo dnf update -y
 
-# Cài Git
-yum install -y git
+sudo dnf install -y git
+sudo dnf install -y nodejs
 
-# Cài Node.js (phiên bản 18 - LTS)
-yum module reset nodejs -y
-yum module enable nodejs:18 -y
-yum install -y nodejs
 
-# Kiểm tra phiên bản
-git --version
-node --version
-npm --version
-
-# Clone repo
 git clone https://github.com/stillxthahn/Fullstack-Ecommerce
 
-# Vào thư mục backend
-cd Fullstack-Ecommerce/backend || exit 1
+cd Fullstack-Ecommerce/backend
 
 # tao!
 
