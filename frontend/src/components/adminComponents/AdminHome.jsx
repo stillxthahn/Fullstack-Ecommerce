@@ -16,7 +16,8 @@ const orderIcon = <BsCart size={22} color="white" />;
 const AdminHome = () => {
  const { data } = useFetchCollection(
   // "http://localhost:3000",
-  "http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com",
+  //   "http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com",
+  "https://d-ec-alb.luongthanh.online",
   "orders"
  );
  const { products } = useSelector((store) => store.product);

@@ -11,7 +11,8 @@ import { storeProducts, getPriceRange } from "../../redux/slice/productSlice";
 const Allproducts = () => {
  const { data, isLoading } = useFetchCollection(
   //   "http://localhost:3000",
-  "http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com",
+  //   "http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com",
+  "https://d-ec-alb.luongthanh.online",
   "products"
  );
  const dispatch = useDispatch();

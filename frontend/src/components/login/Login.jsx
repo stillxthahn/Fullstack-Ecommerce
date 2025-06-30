@@ -22,7 +22,8 @@ const Login = () => {
   try {
    const res = await fetch(
     // "http://localhost:3000/api/auth/login",
-    "http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com/api/auth/login",
+    // "http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com/api/auth/login",
+    "https://d-ec-alb.luongthanh.online/api/auth/login",
     {
      method: "POST",
      headers: {

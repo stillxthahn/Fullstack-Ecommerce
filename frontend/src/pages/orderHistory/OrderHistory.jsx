@@ -12,7 +12,8 @@ import { formatPrice } from "../../utils/formatPrice";
 const OrderHistory = () => {
  const { data, isLoading } = useFetchCollection(
   //   "http://localhost:3000",
-  "http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com",
+  //   "http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com",
+  "https://d-ec-alb.luongthanh.online",
   "orders"
  );
  const { orderHistory } = useSelector((store) => store.order);

@@ -11,7 +11,8 @@ const OrderDetails = () => {
  const { id } = useParams();
  const { document } = useFetchDocument(
   // "http://localhost:3000",
-  "http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com",
+  //   "http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com",
+  "https://d-ec-alb.luongthanh.online",
   "orders",
   id
  );
