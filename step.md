@@ -29,6 +29,14 @@
   - Use the AWS SDK to upload the file to S3
 
 **RDS**
+sudo dnf update -y
+sudo dnf install mariadb105
+
+mysql -h d-ec-rds.cafie6gkkcoq.us-east-1.rds.amazonaws.com \
+      -P 3306 \
+      -u admin \
+      -p \
+      -D mydb < mysql-dump.sql
 - d-ec-rds
 - MySQL database
 - RDS Proxy: 1 SG - 3 inbound rules: For Lambda, and RDS since Proxy and Instance using 1 SG

@@ -8,7 +8,15 @@ const {
  GetSecretValueCommand,
 } = require("@aws-sdk/client-secrets-manager");
 
-app.use(cors());
+// app.use(cors());
+app.use(
+ cors({
+  origin: "https://d-ec.vpbank.click", // Domain frontend
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true, // Nếu bạn sử dụng cookie hoặc token gửi kèm
+ })
+);
 app.use(express.json());
 app.use(morgan("dev"));
 
