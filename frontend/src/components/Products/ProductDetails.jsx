@@ -36,7 +36,7 @@ const ProductDetails = () => {
    const res = await fetch(
     // `http://localhost:3000/api/products/${id}`
     // `http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com/api/products/${id}`
-    `https://d-ec-alb.luongthanh.online/api/products/${id}`
+    `${import.meta.env.VITE_ALB}/api/products/${id}`
    );
    if (!res.ok) throw new Error("Failed to fetch product");
    const data = await res.json();
@@ -53,7 +53,7 @@ const ProductDetails = () => {
    const res = await fetch(
     // `http://localhost:3000/api/reviews?productId=${id}`
     // `http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com/api/reviews?productId=${id}`
-    `https://d-ec-alb.luongthanh.online/api/reviews?productId=${id}`
+    `${import.meta.env.VITE_ALB}/api/reviews?productId=${id}`
    );
    if (!res.ok) throw new Error("Failed to fetch reviews");
    const data = await res.json();

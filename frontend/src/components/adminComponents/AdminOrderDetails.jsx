@@ -10,7 +10,7 @@ const AdminOrderDetails = () => {
  const { id } = useParams();
  const { document } = useFetchDocument(
   //   "http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com",
-  "https://d-ec-alb.luongthanh.online",
+  import.meta.env.VITE_ALB,
   "orders",
   id
  );

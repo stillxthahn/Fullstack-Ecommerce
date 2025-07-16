@@ -29,7 +29,7 @@ const Register = () => {
    const res = await fetch(
     // "http://localhost:3000/api/auth/register",
     // "http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com/api/auth/register",
-    "https://d-ec-alb.luongthanh.online/api/auth/register",
+    `${import.meta.env.VITE_ALB}/api/auth/register`,
     {
      method: "POST",
      headers: { "Content-Type": "application/json" },

@@ -34,7 +34,7 @@ const ChangeOrderStatus = ({ order, orderId }) => {
    const res = await fetch(
     // `http://localhost:3000/api/orders/${orderId}`,
     // `http://d-ec-alb-1415435561.us-east-1.elb.amazonaws.com/api/orders/${orderId}`,
-    `https://d-ec-alb.luongthanh.online/api/orders/${orderId}`,
+    `${import.meta.env.VITE_ALB}/api/orders/${orderId}`,
     {
      method: "PUT",
      headers: {
