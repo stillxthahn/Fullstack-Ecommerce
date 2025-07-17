@@ -39,7 +39,7 @@ const Checkout = () => {
   const createPaymentIntent = async () => {
    try {
     const response = await axios.post(
-     `${import.meta.env.VITE_APIGW}/dev/api/payments`,
+     `${import.meta.env.VITE_APIGW}/api/payments`,
      {
       items: cartItems,
       userEmail: email,

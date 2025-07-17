@@ -51,7 +51,7 @@ const CheckoutForm = () => {
   try {
    const res = await axios.post(
     // "http://localhost:4242/api/orders",
-    `${import.meta.env.VITE_APIGW}/dev/api/orders`,
+    `${import.meta.env.VITE_APIGW}/api/orders`,
     orderDetails,
     {
      headers: { "Content-Type": "application/json" },

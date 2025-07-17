@@ -19,6 +19,9 @@
 }
 ```
 
+**Static website**
+-  aws s3 sync dist/ s3://d-ec.vpbank.click --delete --profile vpbank
+
 **API Gateway**
 - d-ec-apigw
 - Lambda proxy integration to parse the multipart/form-data request

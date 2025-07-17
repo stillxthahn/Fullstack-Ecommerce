@@ -51,7 +51,7 @@ const AddProducts = () => {
   formData.append("file", file);
   try {
    await axios.post(
-    `${import.meta.env.VITE_APIGW}/dev/api/products`,
+    `${import.meta.env.VITE_APIGW}/api/products`,
     // "http://localhost:3000/api/products/lambda",
     formData,
     {
