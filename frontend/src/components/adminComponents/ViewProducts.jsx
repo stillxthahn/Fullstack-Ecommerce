@@ -20,7 +20,11 @@ const ViewProducts = () => {
  const dispatch = useDispatch();
 
  //! Fetching Products from collection using Custom Hook
- const { data, isLoading } = useFetchCollection("products");
+
+ const { data, isLoading } = useFetchCollection(
+  import.meta.env.VITE_ALB,
+  "products"
+ );
  const { filteredProducts } = useSelector((store) => store.filter);
  const { products } = useSelector((store) => store.product);
 
